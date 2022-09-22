@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.github.TheRealjavisKong</groupId>
     <artifactId>k-annotation</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>k-annotation</name>
     <description>custom logger annotation</description>
     <url>https://github.com/TheRealjavisKong/k-annotation</url>

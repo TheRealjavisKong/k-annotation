@@ -29,7 +29,7 @@ public class KLogerAspect {
        * @return: 返回的result是被注解方法的返回值，如果不返回result会造成被注解方法无返回值
      */
     @Around("kLogerAspect()")
-    public Object AroundLogPointCut(ProceedingJoinPoint joinPoint) throws Exception {
+    public Object AroundLogPointCut(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object result = recordLog(joinPoint,startTime);
         return result;
@@ -41,17 +41,12 @@ public class KLogerAspect {
        * @Param startTime: 用于计算运行时间
        * @return: 被注解方法的运行结果
      */
-    private Object recordLog(ProceedingJoinPoint joinPoint, Long startTime) throws Exception {
+    private Object recordLog(ProceedingJoinPoint joinPoint, Long startTime) throws Throwable {
         String methodName = joinPoint.getSignature().getName();
         Object result =null;
-        try{
-            logger.info("====================================================");
-            logger.info("ENTER METHOD:{}",methodName);
-            result = joinPoint.proceed();
-        }catch (Throwable e){
-            logger.error("ENCOUNTER EXCEPTION:{}, MESSAGE:{} ",e.getClass().getName(), e.getMessage());
-            throw new Exception(e.getMessage());
-        }
+        logger.info("====================================================");
+        logger.info("ENTER METHOD:{}",methodName);
+        result = joinPoint.proceed();
         long time =  System.currentTimeMillis() - startTime;
         logger.info("LEAVE METHOD:{}, COST TIME:{} ms",methodName,time);
         logger.info("====================================================");
